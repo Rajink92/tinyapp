@@ -12,7 +12,7 @@
   <%-include('partials/_header') %>
   <main style="margin: 1em;">
     <% if (!user) { %>
-      <h3>Not logged in. Please <a href="/urls/login"><b>login</b></a> or <a href="/urls/register"><b>register</b></a>.</h3>
+      <h3>Not logged in. Please log in. <a href="/login"><b>login</b></a> or <a href="/register"><b>register</b></a>.</h3>
       <% } else { %>
     <h3>My URLs</h3>
     <table class="table">
@@ -29,7 +29,7 @@
         <tr>
           <td><a href="/urls/<%= url %>"><%= url %></a></td>
             <td><a href="<%= urls[url] %>"><%= urls[url].longURL %></a></td>
-            <form action="/urls/<%= url %>/">
+            <form method="Get" action="/urls/<%= url %>/">
               <td><button type="submit" class="btn btn-success">EDIT</button></td>
             </form>
             <form method="POST" action="/urls/<%= url %>/delete">

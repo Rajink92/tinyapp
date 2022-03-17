@@ -19,13 +19,14 @@
     </div>
     <% } else { %>
       <div class="user-login" style="padding-left: 10px;">
-        <form action="/urls/login" id="user-login">
-          <button id="login-button" class="btn btn-secondary">Login</button>
-        </form>
+        <a href="/login" class="btn btn-secondary">
+           Login 
+        </a>
       </div>
       <div class="user-register" style="padding-left: 10px;">
-        <form action="/urls/register/" id="user-registration">
+        <form action="/register/" id="user-registration">
           <button id="registration-button" class="btn btn-secondary">Register</button>
+        </form>
       </div>
    <% } %>
   </nav>
