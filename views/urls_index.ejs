@@ -11,6 +11,9 @@
 <body>
   <%-include('partials/_header') %>
   <main style="margin: 1em;">
+    <% if (!user) { %>
+      <h3>Not logged in. Please <a href="/urls/login"><b>login</b></a> or <a href="/urls/register"><b>register</b></a>.</h3>
+      <% } else { %>
     <h3>My URLs</h3>
     <table class="table">
       <thead>
@@ -25,7 +28,7 @@
       <% for(let url in urls) { %>
         <tr>
           <td><a href="/urls/<%= url %>"><%= url %></a></td>
-            <td><a href="<%= urls[url] %>"><%= urls[url] %></a></td>
+            <td><a href="<%= urls[url] %>"><%= urls[url].longURL %></a></td>
             <form action="/urls/<%= url %>/">
               <td><button type="submit" class="btn btn-success">EDIT</button></td>
             </form>
@@ -36,6 +39,7 @@
       <% } %>
     </tbody>
   </table>
+  <% } %>
 </main>
 <!-- Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
