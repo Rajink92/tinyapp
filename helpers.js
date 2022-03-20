@@ -1,5 +1,7 @@
 const bcrypt = require('bcryptjs');
 
+// Helper Functions
+
 const emailLookupHelper = (email, database) => {
   for (const userID in database) {
     if (database[userID].email === email) {

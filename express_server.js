@@ -16,7 +16,7 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
-//Functions and Objects
+// Random string generator functions
 
 const generateShortUrl = () => {
   const randomString = Math.random().toString(36).slice(-6);

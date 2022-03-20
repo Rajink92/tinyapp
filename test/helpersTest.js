@@ -3,6 +3,8 @@ const bcrypt = require('bcryptjs');
 
 const { emailLookupHelper, loginHelper, urlsForUser } = require('../helpers.js');
 
+// Test Objects
+
 const testUsers = {
   "userRandomID": {
     id: "userRandomID",
@@ -46,6 +48,8 @@ describe('emailLookupHelper', () => {
   });
 });
 
+//Helper Function Tests
+
 describe('loginHelper', () => {
   it('should return a user with valid email and password', () => {
     const user = loginHelper("user3@example.com", "dingleberry-pie", testUsers);
@@ -59,6 +63,8 @@ describe('loginHelper', () => {
     assert.equal(expectedOutput, user);
   });
 });
+
+// Random string tests
 
 describe('urlsForUser', () => {
   it('should return only the users matching a given user ID', () => {
