@@ -16,6 +16,8 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000
 }));
 
+//Functions and Objects
+
 const generateShortUrl = () => {
   const randomString = Math.random().toString(36).slice(-6);
   return randomString;
@@ -26,6 +28,7 @@ const generateRandomID = () => {
   return randomID;
 };
 
+// Databse objects
 
 const urlDatabase = {};
 
@@ -51,6 +54,9 @@ const usersDatabase = {
     password: "$2a$10$n0JFMZYbpt.SL9/ydbhLu.Jgb1dxog21H8Rd02jY7ZxtiUcR2n4O2"
   }
 }
+
+// Get Requests
+
 app.get("/", (req, res) => {
   res.redirect("/urls");
 });
@@ -124,6 +130,9 @@ app.post("/urls", (req, res) => {
   urlDatabase[shortURL].userID = req.session.userID;
     res.redirect(`./urls/${shortURL}`);
 });
+
+// Post Requests
+
 app.post("/urls/:shortURL", (req, res) => {
   const userID = req.session.userID;
   const userURLs = urlsForUser(userID, urlDatabase);
@@ -153,12 +162,12 @@ app.post("/register", (req, res) => {
   usersDatabase[userID].id = userID;
   if (req.body.email.length === 0 || req.body.password.length === 0) {
     res.status(400).send('Must enter a valid value into field');
-  } else if (emailLookupHelper(req.body.email, users)) {
+  } else if (emailLookupHelper(req.body.email, usersDatabase)) {
     res.status(400).send('Account already exists');
   } else {
     usersDatabase[userID].email = req.body.email;
     usersDatabase[userID].password = hashedPassword;
-    res.session.userID = userID;
+    req.session.userID = userID;
     res.redirect("/urls");
   }
 });
@@ -185,6 +194,8 @@ app.post("/logout", (req, res) => {
   req.session = null;
   res.redirect("/urls");
 });
+
+// Listeners
 
 app.listen(PORT, () => {
   console.log(`TinyApp Server running!\nTinyApp app listening on port ${PORT}!`);
